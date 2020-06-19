@@ -1,2 +1,2 @@
 language = "bash"
-run = "clear ; cd src ; bash codechooser.sh"
+run = "clear ; bash codechooser.sh"
