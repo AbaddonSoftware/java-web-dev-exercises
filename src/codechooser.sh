@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+if [ ! -d ../out/repl.it ]; then
+  echo "These sources have not been compiled yet."
+  echo "YOU WILL NEED TO COMPILE THEM TO USE THIS SCRIPT."
+  echo ""
+  bash compile.sh
+fi
+
 declare -A AvailableCode
 AvailableCode=( [Hello World]=exercises.HelloWorld
                 [Alice]=exercises.Alice

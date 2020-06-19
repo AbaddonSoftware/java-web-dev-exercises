@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#!/usr/bin/env bash
 echo "This file compiles all source files even the launchcode" 
 echo "ones which are not included in chooser"
 echo "running this with clean like 'bash compile.sh clean'"
