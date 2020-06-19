@@ -13,6 +13,8 @@ if [ "${RESPONSE,,}" = "y" ] || [ "${RESPONSE,,}" = "yes" ]; then
   echo "this directory and subdirectories may be deleted
         as it's only useful when running code on repl.it" > ../out/repl.it/youcandelete.me
   rm sources
+  read -n 1 -s -r -p "Press any key to continue"
+  clear
 fi 
 
 if [ "${1,,}" = "clean" ]; then # comment: $1 is just the first commandline argument ,, = tolowercase
