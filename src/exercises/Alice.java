@@ -13,6 +13,12 @@ public class Alice {
         System.out.println(aliceInStrings);
         System.out.println("Search for a string above: ");
         searchString = input.nextLine();
-        System.out.println(aliceInStrings.toLowerCase().contains(searchString.toLowerCase()));
+        boolean doesContain = aliceInStrings.toLowerCase().contains(searchString.toLowerCase());
+        System.out.println(doesContain);
+        if(doesContain) {
+            String lookingGlass = aliceInStrings.toLowerCase().replaceAll(searchString.toLowerCase(), "");
+            System.out.println(lookingGlass);
+        }
+
     }
 }
