@@ -2,23 +2,20 @@
 #!/usr/bin/env bash
 echo "This file compiles all source files even the launchcode" 
 echo "ones which are not included in chooser"
-echo "running this with clean like compile clean" 
+echo "running this with clean like 'bash compile.sh clean'"
 echo "will delete compiled classes if you need"
 echo ""
 echo "Would you like to proceed Y/N"
 read RESPONSE
 if [ "${RESPONSE,,}" = "y" ] || [ "${RESPONSE,,}" = "yes" ]; then
-  echo "compiling"
+  echo "compiling sources to ../out/repl.it/"
   find -name "*.java" > sources
-  javac @sources
+  javac -d ../out/repl.it @sources
+  echo "this directory can be deleted as it's only useful when running code on repl.it" > ../out/repl.it/youcandelete.me
   rm sources
 fi 
 
-if [ "${1,,}" = "clean" ]; then
+if [ "${1,,}" = "clean" ]; then # comment: $1 is just the first commandline argument ,, = tolowercase
   echo "cleaning"
-  find -name "*.class" > classes
-  for file in $(cat classes) ; do
-    rm "$file"
-  done
-  rm classes
+  rm -r ../out/repl.it
 fi 

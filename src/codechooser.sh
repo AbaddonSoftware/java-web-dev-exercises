@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 declare -A AvailableCode
-AvailableCode=( [Hello World]=exercises.HelloWorld 
+AvailableCode=( [Hello World]=exercises.HelloWorld
                 [Alice]=exercises.Alice
                 [Miles Per Gallon]=exercises.MilesPerGallon
                 [Rectangle]=exercises.Rectangle
@@ -15,7 +15,7 @@ done
 echo ""
 echo "Enter a number to test the code"
 read INDEX
-KEYS=(${AvailableCode[@]})
-clear ; java ${KEYS[$INDEX-1]}
+VALUES=(${AvailableCode[@]})
+clear ; cd ../out/repl.it/ ; java ${VALUES[$INDEX-1]}
 
 
