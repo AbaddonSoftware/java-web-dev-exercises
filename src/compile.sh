@@ -10,7 +10,8 @@ if [ "${RESPONSE,,}" = "y" ] || [ "${RESPONSE,,}" = "yes" ]; then
   echo "compiling sources to ../out/repl.it/"
   find -name "*.java" > sources
   javac -d ../out/repl.it @sources
-  echo "this directory can be deleted as it's only useful when running code on repl.it" > ../out/repl.it/youcandelete.me
+  echo "this directory and subdirectories may be deleted
+        as it's only useful when running code on repl.it" > ../out/repl.it/youcandelete.me
   rm sources
 fi 
 

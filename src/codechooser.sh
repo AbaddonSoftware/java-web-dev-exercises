@@ -2,6 +2,7 @@
 if [ ! -d ../out/repl.it ]; then
   echo "These sources have not been compiled yet."
   echo "YOU WILL NEED TO COMPILE THEM TO USE THIS SCRIPT."
+  echo "This message only appears when they are not present."
   echo ""
   bash compile.sh
 fi
