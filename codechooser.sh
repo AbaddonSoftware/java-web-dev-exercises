@@ -1,13 +1,28 @@
 #!/usr/bin/env bash
 
-declare -A AvailableCode
+AvailableCode=( "Exercise: Hello World"=exercises.HelloWorld
+                "Exercise: Alice"=exercises.Alice
+                "Exercise: Miles Per Gallon"=exercises.MilesPerGallon
+                "Exercise: Rectangle"=exercises.Rectangle
+                "Studio: Area Of A Circle"=org.launch.java.studios.areaofacircle.Area
+                "Exercise: Array"=exercises.Array
+                "Exercise: ArrayList"=exercises.ArrayList
+                "Exercise: HashMap"=exercises.HashMap
+                "Studio: Counting Characters"=org.launch.javastudios.countingcharacters.CountCharacters )
+                # add additional code above as "Name to be used in launcher"=codespackage.ClassName
+                # no spaces may be used outside of the "quoted" portions including between the
+                # equals (=) sign
 
-AvailableCode=( [Hello World]=exercises.HelloWorld
-                [Alice]=exercises.Alice
-                [Miles Per Gallon]=exercises.MilesPerGallon
-                [Rectangle]=exercises.Rectangle
-                [Area Of A Circle]=org.launch.java.studios.areaofacircle.Area )
-                # add additional code above as [Key/Name to be used in launcher]=codespackage.ClassName
+                # changed this to use arrays so that it won't sort by hash
+
+for Element in "${AvailableCode[@]}"
+do
+  Entry=( $(echo $Element | tr "=" "\n" | sed 's/ /_/g' ) )
+  Name=(${Entry[0]})
+  Class=(${Entry[1]})
+  Names+=(${Name})
+  Classes+=(${Class})
+done
 
 if [ ! -d out/repl.it ]; then
   echo "These sources have not been compiled yet."
@@ -18,15 +33,15 @@ if [ ! -d out/repl.it ]; then
 fi
 
 INDEX=1;
-for KEY in "${!AvailableCode[@]}"; do
- echo "$INDEX $KEY"
+for Name in "${Names[@]}"; do
+ Name=$(echo $Name | sed 's/_/ /g')
+ echo "$INDEX $Name"
  ((INDEX=INDEX+1))
 done  
                       
 echo ""
 echo "Enter a number to test the code"
 read INDEX
-VALUES=(${AvailableCode[@]})
-clear ; cd out/repl.it/ ; java ${VALUES[$INDEX-1]}
+clear ; cd out/repl.it/ ; java ${Classes[$INDEX-1]}
 
 
