@@ -8,7 +8,7 @@ AvailableCode=( "Exercise: Hello World"=exercises.HelloWorld
                 "Exercise: Array"=exercises.Array
                 "Exercise: ArrayList"=exercises.ArrayList
                 "Exercise: HashMap"=exercises.HashMap
-                "Studio: Counting Characters"=org.launch.javastudios.countingcharacters.CountCharacters )
+                "Studio: Counting Characters"=org.launch.java.studios.abaddon.CharacterCounterExample )
                 # add additional code above as "Name to be used in launcher"=codespackage.ClassName
                 # no spaces may be used outside of the "quoted" portions including between the
                 # equals (=) sign

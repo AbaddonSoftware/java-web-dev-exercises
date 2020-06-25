@@ -1,2 +1,2 @@
 language = "bash"
-run = "clear ; bash codechooser.sh" 175 185
+run = "clear ; bash question.sh"

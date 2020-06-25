@@ -23,6 +23,7 @@ if [ "${RESPONSE,,}" = "y" ] || [ "${RESPONSE,,}" = "yes" ]; then
   javac -d out/repl.it @sources
   echo "this directory and subdirectories may be deleted as it's only useful when running code on repl.it" > out/repl.it/youcandelete.me
   rm sources
+  cp file.txt out/repl.it/ ; echo " (this file is found in out/repl.it now)" >> out/repl.it/file.txt
   echo "Press any key to continue"
   read -n 1 -s -r
   clear
