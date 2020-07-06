@@ -9,11 +9,12 @@ public class CharacterCounterExample {
     public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
         String hiddenFigures="If the product of two terms is zero then common sense says at least one of the two terms has to be zero to start with. So if you move all the terms over to one side, you can put the quadratics into a form that can be factored allowing that side of the equation to equal zero. Once you’ve done that, it’s pretty straightforward from there.";
-        String line = null;
+        String line;
         StringBuilder stringFromFile = new StringBuilder();
-        BufferedReader fileRead = new BufferedReader(new FileReader( "file.txt" ));
+        BufferedReader fileRead = new BufferedReader(new FileReader( "resources/file.txt" ));
         while((line = fileRead.readLine()) != null) {
-            stringFromFile.append(line + "\n");
+            String asLine = line + "\n";
+            stringFromFile.append(asLine);
         }
         System.out.println("Type a string to check:");
         String stringFromInput = input.nextLine();
