@@ -1,7 +1,4 @@
 package org.launch.java.studios.abaddon;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
 
 public class CharacterCounter {
@@ -32,19 +29,19 @@ public class CharacterCounter {
         return characterMap;
     }
 
+    @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         HashMap<Character, Integer> aHashMap = count(this.aString);
-        aHashMap.entrySet().forEach(
-                element->{ stringBuilder.append("\"" +element.getKey()+ "\"" + "-" + element.getValue() + " "); });
+        aHashMap.forEach((key, value) -> stringBuilder.append("\"" + key + "\"" + "-" + value + " "));
         return stringBuilder.toString();
     }
 
-    public String toString(Boolean alphanumeric) {
+
+    public String getString(Boolean alphanumeric) {
         StringBuilder stringBuilder = new StringBuilder();
         HashMap<Character, Integer> aHashMap = count(this.aString, alphanumeric);
-        aHashMap.entrySet().forEach(
-                element->{ stringBuilder.append("\"" +element.getKey()+ "\"" + "-" + element.getValue() + " "); });
+        aHashMap.forEach((key, value) -> stringBuilder.append("\"" + key + "\"" + "-" + value + " "));
         return stringBuilder.toString();
     }
 

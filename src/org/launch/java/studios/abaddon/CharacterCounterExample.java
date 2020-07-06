@@ -2,7 +2,6 @@ package org.launch.java.studios.abaddon;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class CharacterCounterExample {
@@ -27,21 +26,21 @@ public class CharacterCounterExample {
         System.out.println("All the characters");
         System.out.println(internalString.toString());
         System.out.println("All the alphanumeric characters");
-        System.out.println(internalString.toString(true));
+        System.out.println(internalString.getString(true));
 
         System.out.println("\n(THE STRING YOU TYPED IN)");
         System.out.println(stringFromInput);
         System.out.println("All the characters");
         System.out.println(inputString.toString());
         System.out.println("All the alphanumeric characters");
-        System.out.println(inputString.toString(true));
+        System.out.println(inputString.getString(true));
 
         System.out.println("\n(THE STRING CREATED FROM THE FILE)");
         System.out.println(stringFromFile.toString().replaceAll("[\n]$", ""));
         System.out.println("All the characters");
         System.out.println(fileString.toString());
         System.out.println("All the alphanumeric characters");
-        System.out.println(fileString.toString(true));
+        System.out.println(fileString.getString(true));
     }
 
 }
