@@ -12,9 +12,7 @@ AvailableCode=( "Class1: Hello World"=exercises.HelloWorld
                 "Class5: Car"=org.launchcode.java.demos.lsn5unittesting.main.Main 
                 "Class5: Car Test"=org.launchcode.java.demos.lsn5unittesting.test.CarTest 
                 "Class6: Computer, Laptop, Smartphone code"=exercises.technology.Program 
-                "Class6: Computer Test"=exercises.technology.test.TestComputer 
-                "Class6: Laptop Test"=exercises.technology.test.TestLaptop 
-                "Class6: Smartphone Test"=exercises.technology.test.TestSmartPhone )
+                "Class6: All Computer / Laptop / Smartphone Tests"="exercises.technology.test.TestComputer exercises.technology.test.TestLaptop exercises.technology.test.TestSmartPhone ")
                 
                 # add additional code above as "Name to be used in launcher"=codespackage.ClassName
                 # no spaces may be used outside of the "quoted" portions including between the
@@ -42,17 +40,31 @@ if [ ! -d out/repl.it ]; then
   bash compile.sh
 fi
 
+
+cd out/repl.it/
+while true; do
 INDEX=1;
 for Name in "${Names[@]}"; do
  Name=$(echo $Name | sed 's/_/ /g')
  echo "$INDEX $Name"
  ((INDEX=INDEX+1))
-done                     
-echo ""
+done
+
+echo
+echo "Type 'exit' to exit the loop"                     
+echo 
 echo "Enter a number to test the code"
 read INDEX
+[ "${INDEX,,}" == "exit" ] && break 
 if [[ "${Names[$INDEX-1],,}" == *"test"* ]]; 
 then Test="org.junit.runner.JUnitCore" 
 else Test="" 
 fi
-clear; cd out/repl.it/ ; java -cp .:./lib/* $Test ${Classes[$INDEX-1]}
+clear; java -cp .:lib/* $Test $(echo ${Classes[$INDEX-1]} | sed 's/_/ /g')
+echo
+echo "----------------------------------------------------"
+echo "This code has ended. Press any key to return to menu"
+read -n 1 -s -r
+clear
+done
+
