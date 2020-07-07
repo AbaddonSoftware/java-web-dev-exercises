@@ -60,7 +60,7 @@ if [[ "${Names[$INDEX-1],,}" == *"test"* ]];
 then Test="org.junit.runner.JUnitCore" 
 else Test="" 
 fi
-clear; java -cp .:lib/* $Test $(echo ${Classes[$INDEX-1]} | sed 's/_/ /g')
+clear; java -cp .:./../../lib/* $Test $(echo ${Classes[$INDEX-1]} | sed 's/_/ /g')
 echo
 echo "----------------------------------------------------"
 echo "This code has ended. Press any key to return to menu"
