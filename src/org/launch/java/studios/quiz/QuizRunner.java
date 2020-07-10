@@ -1,21 +1,21 @@
 package org.launch.java.studios.quiz;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.Collections;
 
 public class QuizRunner {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        Question myTF = new BooleanQuestion("Water is wet?", true);
 
-        Question myTF = new BooleanQuestion("Should grader be in Quiz or Questions", Arrays.asList("Quiz", "Questions"), Arrays.asList("Quiz") );
+        Question aMultipleChoice = new MultipleChoiceQuestion("The default value of a static integer variable of a class in Java is? ",
+                                                               Arrays.asList("0", "1", "Garbage Value", "Null", "-1"),
+                                                               Collections.singletonList("0"));
 
-        System.out.println(myTF.getQuestion());
-        System.out.println("\nEnter Your Answer: ");
-        String answer = input.nextLine();
-        System.out.println(myTF.isCorrect(answer));
+        Question aCheckBox = new CheckBoxQuestion("What are the 4 principles of Object-oriented programming",
+                                                  Arrays.asList("Encapsulation", "Abstraction", "Emulation", "if statements", "Inheritance", "Polymorphism"),
+                                                  Arrays.asList("Encapsulation", "Abstraction", "Inheritance", "Polymorphism"));
 
-
-
+        Quiz myQuiz = new Quiz("The Super Quiz", Arrays.asList(myTF, aMultipleChoice, aCheckBox));
+        myQuiz.runQuiz();
     }
 }
