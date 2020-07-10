@@ -20,9 +20,9 @@ public class BooleanQuestion extends MultipleChoiceQuestion {
     }
 
     @Override
-    public boolean isCorrect(String guess) {
-        guess = guess.equals("1") ? getPossibleChoices().get(0) : guess.equals("2") ? getPossibleChoices().get(2) : guess;
-        return this.getLowerCaseCorrectAnswer().contains(guess.toLowerCase());
+    public double totalCredit(String guess) {
+        guess = guess.trim().equals("1") ? getPossibleChoices().get(0) : guess.trim().equals("2") ? getPossibleChoices().get(2) : guess;
+        return this.getLowerCaseCorrectAnswer().contains(guess.trim().toLowerCase()) ? 1 : 0;
     }
 
 }

@@ -49,8 +49,8 @@ public abstract class Question {
     }
 
     public abstract String getFullQuestion();
-    public abstract boolean isCorrect(String guess);
-    public abstract String validateAnswer(String guess);
+    public abstract double totalCredit(String formattedGuess);
+    public abstract String validateAnswer(String formattedGuess);
 
     public void printFullQuestion() {
         System.out.println(getFullQuestion());

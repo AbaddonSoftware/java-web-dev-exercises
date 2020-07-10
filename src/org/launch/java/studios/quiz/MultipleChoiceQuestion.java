@@ -21,14 +21,14 @@ public class MultipleChoiceQuestion extends Question{
     }
 
     @Override
-    public boolean isCorrect(String guess) {
+    public double totalCredit(String guess) {
         int choiceNumber = isProperFormat(guess, "positive number") ? Integer.parseInt(guess) : -1;
         boolean isBoundNumber = choiceNumber != -1 && isBound(choiceNumber, 1, this.getPossibleChoices().size());
-        return isBoundNumber && this.getLowerCaseCorrectAnswer().contains(this.getLowerCasePossibleChoices().get(choiceNumber - 1));
+        return isBoundNumber && this.getLowerCaseCorrectAnswer().contains(this.getLowerCasePossibleChoices().get(choiceNumber - 1)) ? 1 : 0;
     }
 
     @Override
     public String validateAnswer(String guess) {
-        return isCorrect(guess) ? "This is the correct answer!" : "This was an incorrect answer...";
+        return totalCredit(guess) == 1 ? "This is the correct answer!" : "This was an incorrect answer...";
     }
 }
