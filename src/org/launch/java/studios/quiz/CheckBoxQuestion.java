@@ -11,7 +11,8 @@ public class CheckBoxQuestion extends MultipleChoiceQuestion{
 
     @Override
     public String getFullQuestion() {
-        return "May be more than one correct answer:\n" +super.getFullQuestion().substring(10); // This is a bad hack "Pick one:\n" = 0-10
+        return "May be more than one correct answer:\n" +super.getFullQuestion().substring(10)    // This is a bad hack "Pick one:\n" = 0-10
+                + "\nAnswers may be either space and/or comma separated.";
     }
 
     @Override

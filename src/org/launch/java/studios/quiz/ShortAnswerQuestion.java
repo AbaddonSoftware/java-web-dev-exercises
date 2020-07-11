@@ -15,7 +15,7 @@ public class ShortAnswerQuestion extends Question {
 
     @Override
     public double totalCredit(String guess) {
-        return this.getLowerCaseCorrectAnswer().contains(guess.trim()) ? 1 : 0;
+        return this.getLowerCaseCorrectAnswer().contains(guess) ? 1 : 0;
     }
 
     @Override

@@ -47,7 +47,7 @@ public class Quiz {
             System.out.println("\n" +question.getFullQuestion());
             do {
                 System.out.println("\nYour Answer: ");
-                answer = input.nextLine();
+                answer = input.nextLine().trim().toLowerCase();
             } while (!question.isFormattedAnswer(answer));
             correctAnswers += question.totalCredit(answer);
             System.out.println(question.getAnswerResult(answer));
