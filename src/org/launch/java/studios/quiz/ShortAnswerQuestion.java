@@ -5,12 +5,12 @@ import java.util.List;
 
 public class ShortAnswerQuestion extends Question {
     public ShortAnswerQuestion(String question, List<String> correctAnswer) {
-        super(question, Collections.EMPTY_LIST, correctAnswer);
+        super(question, null, correctAnswer);
     }
 
     @Override
     public String getFullQuestion() {
-        return question + "\nType a short answer (less than 80 characters) below";
+        return question + "\nType a short answer (between 5 - 80 characters) below";
     }
 
     @Override
