@@ -4,13 +4,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
 
-public class BooleanQuestion extends MultipleChoiceQuestion {
-
-    public BooleanQuestion(String question, List<String> possibleChoices, List<String> correctAnswer) {
-        super(question, possibleChoices, correctAnswer);
+class notBinaryException extends Exception {
+    public notBinaryException(String message) {
+        super(message);
     }
 
-    public BooleanQuestion(String question, Boolean correctAnswer) {
+}
+
+public class BinaryQuestion extends MultipleChoiceQuestion {
+
+    public BinaryQuestion(String question, List<String> possibleChoices, List<String> correctAnswer) throws notBinaryException {
+        super(question, possibleChoices, correctAnswer);
+        if (possibleChoices.size() != 2) { throw new notBinaryException("notBinaryException: two choices not found."); }
+    }
+
+    public BinaryQuestion(String question, Boolean correctAnswer) {
         super(question, Arrays.asList("True", "False"), Collections.singletonList(correctAnswer.toString()));
     }
 
@@ -21,6 +29,7 @@ public class BooleanQuestion extends MultipleChoiceQuestion {
 
     @Override
     public double totalCredit(String guess) {
+        guess = guess.equals("1") ? possibleChoices.get(0) : guess.equals("2") ? possibleChoices.get(1) : guess;
         return this.getLowerCaseCorrectAnswer().contains(guess.toLowerCase()) ? 1 : 0;
     }
 

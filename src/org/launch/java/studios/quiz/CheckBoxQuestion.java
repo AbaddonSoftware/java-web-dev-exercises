@@ -5,24 +5,28 @@ import java.util.List;
 
 public class CheckBoxQuestion extends MultipleChoiceQuestion{
 
-
     public CheckBoxQuestion(String question, List<String> possibleChoices, List<String> correctAnswer) {
         super(question, possibleChoices, correctAnswer);
     }
 
     @Override
+    public String getFullQuestion() {
+        return "May be more than one correct answer:\n" +super.getFullQuestion().substring(10); // This is a bad hack "Pick one:\n" = 0-10
+    }
+
+    @Override
     public double totalCredit(String guess) {
-        String[] answers = guess.split("[, ]+");
-        double totalAnswers = possibleChoices.size();
+        String[] inputs = guess.split("[, ]+");
+        double totalInputs = inputs.length;
         double totalCorrectAnswers = correctAnswer.size();
         double totalCorrectlyAnswered = 0;
-        for (String answer : answers) {
-            int choiceNumber = Integer.parseInt(answer);
+        for (String input : inputs) {
+            int choiceNumber = Integer.parseInt(input);
             boolean isCorrect = this.getLowerCaseCorrectAnswer().contains(this.getLowerCasePossibleChoices().get(choiceNumber - 1));
             totalCorrectlyAnswered += isCorrect ? 1 : 0;
         }
-        //hack for now, will fix later
-        return totalCorrectlyAnswered / totalCorrectAnswers;
+        double partialCredit = .125 * totalCorrectlyAnswered; // arbitrary for now
+        return totalInputs > totalCorrectlyAnswered ? partialCredit : totalCorrectlyAnswered / totalCorrectAnswers;
     }
 
     @Override
@@ -39,8 +43,8 @@ public class CheckBoxQuestion extends MultipleChoiceQuestion{
         int totalBoundInputs = (int) Arrays.stream(inputs).filter(answer -> isBoundInput(answer, 1, totalAnswers)).count();
         boolean unboundInputsFound = totalInputs != totalBoundInputs;
         boolean duplicateInputsFound = Arrays.stream(inputs).distinct().count() != totalInputs;
-        boolean inputsMatchOrExceedAnswers = totalInputs >= totalAnswers;
-        if(!duplicateInputsFound && !unboundInputsFound && !inputsMatchOrExceedAnswers) {
+        boolean inputsMatchOrExceedTotalAnswers = totalInputs >= totalAnswers;
+        if(!duplicateInputsFound && !unboundInputsFound && !inputsMatchOrExceedTotalAnswers) {
             return true;
         }
         System.out.printf("Input must consist of numbers between %d - %d (space or comma separated) and can not meet or exceed total number of possible choices %d.%n", 1, totalAnswers, totalAnswers);

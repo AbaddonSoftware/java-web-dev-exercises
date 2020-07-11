@@ -48,6 +48,7 @@ public abstract class Question {
         this.correctAnswer = correctAnswer;
     }
 
+
     public abstract String getFullQuestion();
     public abstract double totalCredit(String guess);
     public abstract String getAnswerResult(String guess);

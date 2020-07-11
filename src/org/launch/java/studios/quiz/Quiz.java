@@ -50,7 +50,7 @@ public class Quiz {
                 answer = input.nextLine();
             } while (!question.isFormattedAnswer(answer));
             correctAnswers += question.totalCredit(answer);
-            //System.out.println(question.getAnswerResult(answer));
+            System.out.println(question.getAnswerResult(answer));
         }
         System.out.println("\n" +simpleGradeQuiz(correctAnswers, totalQuestions));
     }

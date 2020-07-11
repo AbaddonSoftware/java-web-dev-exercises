@@ -17,7 +17,7 @@ public class MultipleChoiceQuestion extends Question{
             possibleAnswers.append(fullAnswer);
             answerIndex++;
         }
-        return question + "\n" + possibleAnswers.toString();
+        return "Pick one:\n" +question+ "\n" + possibleAnswers.toString();
     }
 
     @Override
