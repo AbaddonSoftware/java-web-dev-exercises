@@ -15,10 +15,10 @@ public class QuizRunner {
                                                   Arrays.asList("Encapsulation", "Abstraction", "Emulation", "if statements", "Inheritance", "Polymorphism"),
                                                   Arrays.asList("Encapsulation", "Abstraction", "Inheritance", "Polymorphism"));
         Question paragraph = new ParagraphQuestion("Write a paragraph about Donnie's Disdain for if statements",
-                Collections.singletonList("He thinks they are largely overused in modern programming and finds " +
+                Arrays.asList("He thinks they are largely overused in modern programming and finds " +
                         "that most of the time this results in code that is unoptimized and hard to read. " +
                         "If he understood how truly valuable they are then he'd probably change his mind " +
-                        "else he will continue to fight this battle."));
+                        "else he will continue to fight this battle.", "Donnie is a crazy man who has too much time on his hands."));
         Question linearQuestion = new LinearScale("on a scale of 1 to 5: how much does Donnie hate improperly named variables... even when they are all throughout his own code",
                                                    5, "5");
 
