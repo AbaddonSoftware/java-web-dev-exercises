@@ -12,7 +12,8 @@ AvailableCode=( "Class1: Hello World"=exercises.HelloWorld
                 "Class5: Car"=org.launchcode.java.demos.lsn5unittesting.main.Main 
                 "Class5: Car Test"=org.launchcode.java.demos.lsn5unittesting.test.CarTest 
                 "Class6: Computer, Laptop, Smartphone code"=exercises.technology.Program 
-                "Class6: All Computer / Laptop / Smartphone Tests"="exercises.technology.test.TestComputer exercises.technology.test.TestLaptop exercises.technology.test.TestSmartPhone ")
+                "Class6: All Computer / Laptop / Smartphone Tests"="exercises.technology.test.TestComputer exercises.technology.test.TestLaptop exercises.technology.test.TestSmartPhone "
+                "Studio6: Quiz And Questions"=org.launch.java.studios.quiz.QuizRunner )
                 
                 # add additional code above as "Name to be used in launcher"=codespackage.ClassName
                 # no spaces may be used outside of the "quoted" portions including between the

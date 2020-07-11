@@ -1,21 +1,16 @@
 package org.launch.java.studios.quiz;
 
+import org.launch.java.studios.quiz.customexceptions.NotBinaryException;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
 
-class notBinaryException extends Exception {
-    public notBinaryException(String message) {
-        super(message);
-    }
-
-}
-
 public class BinaryQuestion extends MultipleChoiceQuestion {
 
-    public BinaryQuestion(String question, List<String> possibleChoices, List<String> correctAnswer) throws notBinaryException {
+    public BinaryQuestion(String question, List<String> possibleChoices, List<String> correctAnswer) throws NotBinaryException {
         super(question, possibleChoices, correctAnswer);
-        if (possibleChoices.size() != 2) { throw new notBinaryException("notBinaryException: two choices not found."); }
+        if (possibleChoices.size() != 2) { throw new NotBinaryException("notBinaryException: two choices not found."); }
     }
 
     public BinaryQuestion(String question, Boolean correctAnswer) {
@@ -28,9 +23,9 @@ public class BinaryQuestion extends MultipleChoiceQuestion {
     }
 
     @Override
-    public double totalCredit(String guess) {
-        guess = guess.equals("1") ? possibleChoices.get(0) : guess.equals("2") ? possibleChoices.get(1) : guess;
-        return this.getLowerCaseCorrectAnswer().contains(guess.toLowerCase()) ? 1 : 0;
+    public double totalCredit(String formattedGuess) {
+        formattedGuess = formattedGuess.equals("1") ? possibleChoices.get(0) : formattedGuess.equals("2") ? possibleChoices.get(1) : formattedGuess;
+        return this.getLowerCaseCorrectAnswer().contains(formattedGuess.toLowerCase()) ? 1 : 0;
     }
 
     @Override

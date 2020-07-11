@@ -15,8 +15,8 @@ public class CheckBoxQuestion extends MultipleChoiceQuestion{
     }
 
     @Override
-    public double totalCredit(String guess) {
-        String[] inputs = guess.split("[, ]+");
+    public double totalCredit(String formattedGuess) {
+        String[] inputs = formattedGuess.split("[, ]+");
         double totalInputs = inputs.length;
         double totalCorrectAnswers = correctAnswer.size();
         double totalCorrectlyAnswered = 0;
@@ -30,8 +30,8 @@ public class CheckBoxQuestion extends MultipleChoiceQuestion{
     }
 
     @Override
-    public String getAnswerResult(String guess) {
-        double totalCredit = totalCredit(guess);
+    public String getAnswerResult(String formattedGuess) {
+        double totalCredit = totalCredit(formattedGuess);
         return totalCredit == 1 ? "This is correct." : totalCredit > 0 ? "Partially correct." : "This was incorrect.";
     }
 

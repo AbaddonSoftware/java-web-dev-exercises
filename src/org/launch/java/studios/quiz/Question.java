@@ -50,8 +50,8 @@ public abstract class Question {
 
 
     public abstract String getFullQuestion();
-    public abstract double totalCredit(String guess);
-    public abstract String getAnswerResult(String guess);
+    public abstract double totalCredit(String formattedGuess);
+    public abstract String getAnswerResult(String formattedGuess);
     public abstract boolean isFormattedAnswer(String guess);
 
     public void printFullQuestion() {
@@ -60,18 +60,6 @@ public abstract class Question {
 
     public void printValidateAnswer(String guess) {
         System.out.println(getAnswerResult(guess));
-    }
-
-    public static boolean isValidInput(String aString, String aType) {
-        switch(aType.toLowerCase()) {
-            case "positive number":
-                return aString.matches("^[0-9]+$");
-            case "short form":
-                return aString.matches("^[.]{3,80}$");
-            case "paragraph":
-                return aString.matches("^[.]{3,500}$");
-        }
-        return false;
     }
 
     public static boolean isBoundInput(String aString, int low, int high) {

@@ -21,14 +21,14 @@ public class MultipleChoiceQuestion extends Question{
     }
 
     @Override
-    public double totalCredit(String guess) {
-        int choiceNumber = Integer.parseInt(guess);
+    public double totalCredit(String formattedGuess) {
+        int choiceNumber = Integer.parseInt(formattedGuess);
         return this.getLowerCaseCorrectAnswer().contains(this.getLowerCasePossibleChoices().get(choiceNumber - 1)) ? 1 : 0;
     }
 
     @Override
-    public String getAnswerResult(String guess) {
-        return totalCredit(guess) == 1 ? "This is the correct answer!" : "This was an incorrect answer...";
+    public String getAnswerResult(String formattedGuess) {
+        return totalCredit(formattedGuess) == 1 ? "This is the correct answer!" : "This was an incorrect answer...";
     }
 
     @Override
