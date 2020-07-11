@@ -49,50 +49,38 @@ public abstract class Question {
     }
 
     public abstract String getFullQuestion();
-    public abstract double totalCredit(String formattedGuess);
-    public abstract String validateAnswer(String formattedGuess);
+    public abstract double totalCredit(String guess);
+    public abstract String getAnswerResult(String guess);
+    public abstract boolean isFormattedAnswer(String guess);
 
     public void printFullQuestion() {
         System.out.println(getFullQuestion());
     }
 
     public void printValidateAnswer(String guess) {
-        System.out.println(validateAnswer(guess));
+        System.out.println(getAnswerResult(guess));
     }
 
-//    public static boolean isProperFormat(String aString, String type, String errorMsg) {
-//        boolean isMatch = false;
-//        switch(type.toLowerCase()) {
-//            case "positive number":
-//                isMatch = aString.matches("^[0-9]*$");
-//                break;
-//            case "short form":
-//                return aString.matches("^[.]{3,80}$");
-//            case "paragraph":
-//                return aString.matches("^[.]{3,500}$");
-//        }
-//        if(!isMatch) {
-//            System.out.println(errorMsg);
-//        }
-//        return isMatch;
-//    }
-
-    public static boolean isProperFormat(String aString, String type) {
-        boolean isMatch = false;
-        switch(type.toLowerCase()) {
+    public static boolean isValidInput(String aString, String aType) {
+        switch(aType.toLowerCase()) {
             case "positive number":
-                isMatch = aString.matches("^[0-9]*$");
-                break;
+                return aString.matches("^[0-9]+$");
             case "short form":
                 return aString.matches("^[.]{3,80}$");
             case "paragraph":
                 return aString.matches("^[.]{3,500}$");
         }
-        return isMatch;
+        return false;
     }
 
-    public static boolean isBound(int anInt, int lowValue, int highValue) {
-        return anInt >= lowValue && anInt <= highValue;
+    public static boolean isBoundInput(String aString, int low, int high) {
+        int tens = high / 10;
+        int ones = high % 10;
+        String regexString = high < 10 ? String.format("^[%d-%d]$", low, high) : String.format("^[0-%d]?[%d-9]$|^[%d]{1}[0-%d]$", tens-1, low, tens, ones);
+        return aString.matches(regexString);
     }
 
+    public static void main(String[] args) {
+        System.out.println(isBoundInput("10", 1, 10));
+    }
 }

@@ -13,21 +13,37 @@ public class CheckBoxQuestion extends MultipleChoiceQuestion{
     @Override
     public double totalCredit(String guess) {
         String[] answers = guess.split("[, ]+");
-        double totalCorrectAnswers = this.getCorrectAnswer().size();
+        double totalAnswers = possibleChoices.size();
+        double totalCorrectAnswers = correctAnswer.size();
         double totalCorrectlyAnswered = 0;
         for (String answer : answers) {
-            int choiceNumber = isProperFormat(answer, "positive number") ? Integer.parseInt(answer) : -1;
-            boolean isBoundNumber = choiceNumber != -1 && isBound(choiceNumber, 1, this.getPossibleChoices().size());
-            boolean isCorrect = isBoundNumber && this.getLowerCaseCorrectAnswer().contains(this.getLowerCasePossibleChoices().get(choiceNumber - 1));
+            int choiceNumber = Integer.parseInt(answer);
+            boolean isCorrect = this.getLowerCaseCorrectAnswer().contains(this.getLowerCasePossibleChoices().get(choiceNumber - 1));
             totalCorrectlyAnswered += isCorrect ? 1 : 0;
         }
-        double totalIncorrectlyAnswered = answers.length - totalCorrectlyAnswered;
         //hack for now, will fix later
-        return answers.length < this.getLowerCasePossibleChoices().size() ? (totalCorrectlyAnswered - totalIncorrectlyAnswered) / totalCorrectAnswers : 0;
+        return totalCorrectlyAnswered / totalCorrectAnswers;
     }
 
     @Override
-    public String validateAnswer(String guess) {
-        return totalCredit(guess) == 1 ? "This is correct." : totalCredit(guess) > 0 ? "Partially correct." : "This was incorrect.";
+    public String getAnswerResult(String guess) {
+        double totalCredit = totalCredit(guess);
+        return totalCredit == 1 ? "This is correct." : totalCredit > 0 ? "Partially correct." : "This was incorrect.";
+    }
+
+    @Override
+    public boolean isFormattedAnswer(String guess) {
+        String[] inputs = guess.split("[, ]+");
+        int totalAnswers = possibleChoices.size();
+        int totalInputs = inputs.length;
+        int totalBoundInputs = (int) Arrays.stream(inputs).filter(answer -> isBoundInput(answer, 1, totalAnswers)).count();
+        boolean unboundInputsFound = totalInputs != totalBoundInputs;
+        boolean duplicateInputsFound = Arrays.stream(inputs).distinct().count() != totalInputs;
+        boolean inputsMatchOrExceedAnswers = totalInputs >= totalAnswers;
+        if(!duplicateInputsFound && !unboundInputsFound && !inputsMatchOrExceedAnswers) {
+            return true;
+        }
+        System.out.printf("Input must consist of numbers between %d - %d (space or comma separated) and can not meet or exceed total number of possible choices %d.%n", 1, totalAnswers, totalAnswers);
+        return false;
     }
 }

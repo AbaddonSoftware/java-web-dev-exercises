@@ -21,8 +21,21 @@ public class BooleanQuestion extends MultipleChoiceQuestion {
 
     @Override
     public double totalCredit(String guess) {
-        guess = guess.trim().equals("1") ? getPossibleChoices().get(0) : guess.trim().equals("2") ? getPossibleChoices().get(2) : guess;
-        return this.getLowerCaseCorrectAnswer().contains(guess.trim().toLowerCase()) ? 1 : 0;
+        return this.getLowerCaseCorrectAnswer().contains(guess.toLowerCase()) ? 1 : 0;
+    }
+
+    @Override
+    public boolean isFormattedAnswer(String guess) {
+        String word1 = possibleChoices.get(0).toLowerCase();
+        String word2 = possibleChoices.get(1).toLowerCase();
+        int totalAnswers = possibleChoices.size();
+        boolean isWordAnswer = guess.equals(word1) || guess.equals(word2);
+        boolean isBound = isBoundInput(guess, 1, totalAnswers);
+        if (isBound || isWordAnswer) {
+            return true;
+        }
+        System.out.printf("Input must be a number between 1 and %d or the words %s or %s%n", totalAnswers, word1, word2);
+        return false;
     }
 
 }

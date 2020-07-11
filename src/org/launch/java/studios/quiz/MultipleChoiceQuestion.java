@@ -17,18 +17,27 @@ public class MultipleChoiceQuestion extends Question{
             possibleAnswers.append(fullAnswer);
             answerIndex++;
         }
-        return this.question + "\n" + possibleAnswers.toString();
+        return question + "\n" + possibleAnswers.toString();
     }
 
     @Override
     public double totalCredit(String guess) {
-        int choiceNumber = isProperFormat(guess, "positive number") ? Integer.parseInt(guess) : -1;
-        boolean isBoundNumber = choiceNumber != -1 && isBound(choiceNumber, 1, this.getPossibleChoices().size());
-        return isBoundNumber && this.getLowerCaseCorrectAnswer().contains(this.getLowerCasePossibleChoices().get(choiceNumber - 1)) ? 1 : 0;
+        int choiceNumber = Integer.parseInt(guess);
+        return this.getLowerCaseCorrectAnswer().contains(this.getLowerCasePossibleChoices().get(choiceNumber - 1)) ? 1 : 0;
     }
 
     @Override
-    public String validateAnswer(String guess) {
+    public String getAnswerResult(String guess) {
         return totalCredit(guess) == 1 ? "This is the correct answer!" : "This was an incorrect answer...";
+    }
+
+    @Override
+    public boolean isFormattedAnswer(String guess) {
+        boolean isBound = isBoundInput(guess, 1, possibleChoices.size());
+        if (isBound) {
+            return true;
+        }
+        System.out.println("Input must be a number between 1 and " +possibleChoices.size());
+        return false;
     }
 }

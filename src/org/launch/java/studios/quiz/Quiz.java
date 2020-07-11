@@ -32,9 +32,9 @@ public class Quiz {
         questions.add(aQuestion);
     }
 
-    public String gradeQuiz(double correctAnswers, double totalQuestions) {
+    public String simpleGradeQuiz(double correctAnswers, double totalQuestions) {
         double gradeNumber = correctAnswers / totalQuestions * 100;
-        return "You got " +correctAnswers+ " out of " +totalQuestions+ " correct! You're total score is " +gradeNumber;
+        return String.format("You got %.2f out %.0f of correct! You're total score is %.2f%n", correctAnswers, totalQuestions, gradeNumber);
     }
 
     public void runQuiz() {
@@ -42,14 +42,17 @@ public class Quiz {
         System.out.println(quizName.toUpperCase());
         double correctAnswers = 0;
         double totalQuestions = questions.size();
+        String answer;
         for (Question question : questions) {
             System.out.println("\n" +question.getFullQuestion());
-            System.out.println("\nYour Answer: ");
-            String answer = input.nextLine();
+            do {
+                System.out.println("\nYour Answer: ");
+                answer = input.nextLine();
+            } while (!question.isFormattedAnswer(answer));
             correctAnswers += question.totalCredit(answer);
-            System.out.println("\n" +question.validateAnswer(answer));
+            //System.out.println(question.getAnswerResult(answer));
         }
-        System.out.println("\n" +gradeQuiz(correctAnswers, totalQuestions));
+        System.out.println("\n" +simpleGradeQuiz(correctAnswers, totalQuestions));
     }
 
 
