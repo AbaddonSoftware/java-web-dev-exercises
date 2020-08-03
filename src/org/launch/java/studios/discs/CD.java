@@ -7,8 +7,8 @@ public class CD extends BaseDisc {
         super(200, 500, 732, 1, "CD", false);
     }
 
-    public CD(double speedAtCenter, double speedAtEdge, double capacity, double speedMultiplier, String diskType, boolean isRewritable) {
-        super(speedAtCenter, speedAtEdge, capacity, speedMultiplier, diskType, isRewritable);
+    public CD(double speedAtCenter, double speedAtEdge, double capacity, double speedMultiplier, String diskType, boolean rewritable) {
+        super(speedAtCenter, speedAtEdge, capacity, speedMultiplier, diskType, rewritable);
     }
 
 }

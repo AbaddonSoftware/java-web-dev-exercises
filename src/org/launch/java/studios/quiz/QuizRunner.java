@@ -12,8 +12,8 @@ public class QuizRunner {
                                                                Collections.singletonList("0"));
 
         Question aCheckBox = new CheckBoxQuestion("What are the 4 principles of Object-oriented programming",
-                                                  Arrays.asList("Encapsulation", "Abstraction", "Emulation", "if statements", "Inheritance", "Polymorphism", "a random statement"),
-                                                  Arrays.asList("Encapsulation", "Abstraction", "Inheritance")); //("Encapsulation", "Abstraction", "Inheritance", "Polymorphism")
+                                                  Arrays.asList("Encapsulation", "Abstraction", "Emulation", "if statements", "Inheritance", "Polymorphism"),
+                                                  Arrays.asList("Encapsulation", "Abstraction", "Inheritance", "Polymorphism"));
         Question paragraphQuestion = new ParagraphQuestion("Write a paragraph about Donnie's Disdain for if statements",
                 Arrays.asList("He thinks they are largely overused in modern programming and finds " +
                         "that most of the time this results in code that is unoptimized and hard to read. " +
