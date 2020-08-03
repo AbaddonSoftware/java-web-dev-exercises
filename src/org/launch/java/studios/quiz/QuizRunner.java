@@ -23,11 +23,7 @@ public class QuizRunner {
                                                    5, "5");
 
         Quiz myQuiz = new Quiz("The Super Quiz", Arrays.asList(myTF, aMultipleChoice, aCheckBox, paragraphQuestion, linearQuestion));
-        Quiz newQuiz = new Quiz("The Super Quiz", Arrays.asList(aCheckBox, aCheckBox, aCheckBox, aCheckBox, aCheckBox));
 
-
-
-
-        newQuiz.runQuiz();
+        myQuiz.runQuiz();
     }
 }
