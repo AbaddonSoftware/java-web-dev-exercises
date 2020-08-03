@@ -1,5 +1,7 @@
 package org.launch.java.studios.quiz;
 
+import org.launch.java.studios.quiz.customexceptions.NotBinaryException;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +24,7 @@ public abstract class Question {
         this.question = question;
     }
 
-    public void setPossibleChoices(List<String> possibleChoices) {
+    public void setPossibleChoices(List<String> possibleChoices) throws NotBinaryException {
         this.possibleChoices = possibleChoices;
     }
 
@@ -48,6 +50,14 @@ public abstract class Question {
         this.correctAnswer = correctAnswer;
     }
 
+    public String getAnswerByNumber(int order) {
+        return getPossibleChoices().get(order-1);
+    }
+
+    public String getAnswerByNumber(int order, boolean startsFromZero) {
+        return startsFromZero ? getPossibleChoices().get(order) : getPossibleChoices().get(order-1);
+    }
+
 
     public abstract String getFullQuestion();
     public abstract double totalCredit(String formattedGuess);
@@ -68,8 +78,5 @@ public abstract class Question {
         String regexString = high < 10 ? String.format("^[%d-%d]$", low, high) : String.format("^[0-%d]?[%d-9]$|^[%d]{1}[0-%d]$", tens-1, low, tens, ones);
         return aString.matches(regexString);
     }
-
-    public static void main(String[] args) {
-        System.out.println(isBoundInput("10", 1, 10));
-    }
+    
 }

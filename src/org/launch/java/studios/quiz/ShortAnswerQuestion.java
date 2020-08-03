@@ -25,6 +25,11 @@ public class ShortAnswerQuestion extends Question {
 
     @Override
     public boolean isFormattedAnswer(String guess) {
-        return guess.length() < 80 && guess.length() >= 5;  //5 was an abitrary choice
+        boolean characterCountInRange = guess.length() <= 80 && guess.length() >= 5;
+        if(characterCountInRange) {
+            return true;
+        }
+        System.out.println("Entry must be between 5 and 80 characters long.");
+        return false;
     }
 }

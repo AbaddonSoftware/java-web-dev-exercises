@@ -15,6 +15,8 @@ public class CheckBoxQuestion extends MultipleChoiceQuestion{
                 + "\nAnswers may be either space and/or comma separated.";
     }
 
+
+
     @Override
     public double totalCredit(String formattedGuess) {
         String[] inputs = formattedGuess.split("[, ]+");
@@ -26,14 +28,16 @@ public class CheckBoxQuestion extends MultipleChoiceQuestion{
             boolean isCorrect = this.getLowerCaseCorrectAnswer().contains(this.getLowerCasePossibleChoices().get(choiceNumber - 1));
             totalCorrectlyAnswered += isCorrect ? 1 : 0;
         }
-        double partialCredit = .125 * totalCorrectlyAnswered; // arbitrary for now
-        return totalInputs > totalCorrectlyAnswered ? partialCredit : totalCorrectlyAnswered / totalCorrectAnswers;
+        double totalIncorrectlyAnswered = totalInputs - totalCorrectlyAnswered;
+        double result = totalCorrectlyAnswered - totalIncorrectlyAnswered > 0 ? (totalCorrectlyAnswered - totalIncorrectlyAnswered) / totalCorrectAnswers : 0;
+        return result;
     }
 
     @Override
     public String getAnswerResult(String formattedGuess) {
         double totalCredit = totalCredit(formattedGuess);
-        return totalCredit == 1 ? "This is correct." : totalCredit > 0 ? "Partially correct." : "This was incorrect.";
+        String percentScore = String.format("%.0f%%", totalCredit * 100);
+        return totalCredit == 1 ? "This is correct. " +percentScore : totalCredit > 0 ? "Partially correct. " +percentScore : "This was incorrect. " +percentScore;
     }
 
     @Override
@@ -45,7 +49,7 @@ public class CheckBoxQuestion extends MultipleChoiceQuestion{
         boolean unboundInputsFound = totalInputs != totalBoundInputs;
         boolean duplicateInputsFound = Arrays.stream(inputs).distinct().count() != totalInputs;
         boolean inputsMatchOrExceedTotalAnswers = totalInputs >= totalAnswers;
-        if(!duplicateInputsFound && !unboundInputsFound && !inputsMatchOrExceedTotalAnswers) {
+        if(!duplicateInputsFound && !unboundInputsFound ) {// && !inputsMatchOrExceedTotalAnswers) {
             return true;
         }
         System.out.printf("Input must consist of numbers between %d - %d (space or comma separated) and can not meet or exceed total number of possible choices %d.%n", 1, totalAnswers, totalAnswers);

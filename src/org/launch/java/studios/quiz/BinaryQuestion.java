@@ -10,7 +10,9 @@ public class BinaryQuestion extends MultipleChoiceQuestion {
 
     public BinaryQuestion(String question, List<String> possibleChoices, List<String> correctAnswer) throws NotBinaryException {
         super(question, possibleChoices, correctAnswer);
-        if (possibleChoices.size() != 2) { throw new NotBinaryException("notBinaryException: two choices not found."); }
+        if (possibleChoices.size() != 2) {
+            throw new NotBinaryException("NotBinaryException: Must not contain more than 2 elements.");
+        }
     }
 
     public BinaryQuestion(String question, Boolean correctAnswer) {
@@ -18,8 +20,18 @@ public class BinaryQuestion extends MultipleChoiceQuestion {
     }
 
     @Override
+    public void setPossibleChoices(List<String> possibleChoices) throws NotBinaryException {
+        if (possibleChoices.size() != 2) {
+            throw new NotBinaryException("NotBinaryException: Must not contain more than 2 elements.");
+        }
+        this.possibleChoices = possibleChoices;
+    }
+
+    @Override
     public String getFullQuestion() {
-        return getPossibleChoices().get(0)+ " or " +getPossibleChoices().get(1)+ ": " +this.getQuestion();
+        String word1 = getPossibleChoices().get(0);
+        String word2 = getPossibleChoices().get(1);
+        return word1+ " or " +word2+ ": " +this.getQuestion() + "\nAnswers may be either 1 (first option) or 2 (second option) or the words, " +word1+ " or " +word2+ ".";
     }
 
     @Override
@@ -30,15 +42,14 @@ public class BinaryQuestion extends MultipleChoiceQuestion {
 
     @Override
     public boolean isFormattedAnswer(String guess) {
-        String word1 = possibleChoices.get(0).toLowerCase();
-        String word2 = possibleChoices.get(1).toLowerCase();
-        int totalAnswers = possibleChoices.size();
-        boolean isWordAnswer = guess.equals(word1) || guess.equals(word2);
-        boolean isBound = isBoundInput(guess, 1, totalAnswers);
+        String word1 = possibleChoices.get(0);
+        String word2 = possibleChoices.get(1);
+        boolean isWordAnswer = guess.equals(word1.toLowerCase()) || guess.equals(word2.toLowerCase());
+        boolean isBound = isBoundInput(guess, 1, 2);
         if (isBound || isWordAnswer) {
             return true;
         }
-        System.out.printf("Input must be a number between 1 and %d or the words %s or %s%n", totalAnswers, word1, word2);
+        System.out.printf("Input must be a number either 1 (first option) or 2 (second option) or the words, %s or %s%n", word1, word2);
         return false;
     }
 

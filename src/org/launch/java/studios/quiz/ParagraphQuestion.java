@@ -1,6 +1,5 @@
 package org.launch.java.studios.quiz;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ParagraphQuestion extends ShortAnswerQuestion {
@@ -16,6 +15,11 @@ public class ParagraphQuestion extends ShortAnswerQuestion {
 
     @Override
     public boolean isFormattedAnswer(String guess) {
-        return guess.length() <= 500 && guess.length() >= 25;
+        boolean characterCountInRange = guess.length() <= 500 && guess.length() >= 25;
+        if(characterCountInRange) {
+            return true;
+        }
+        System.out.println("Entry must be between 25 and 500 characters long.");
+        return false;
     }
 }
